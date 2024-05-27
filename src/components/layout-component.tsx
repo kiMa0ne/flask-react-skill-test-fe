@@ -20,7 +20,7 @@ interface LayoutProps {
 const LayoutComponent = ({children}: LayoutProps) => {
   return (
     <div>
-      <NavigationMenu>
+      {/* <NavigationMenu>
         <NavigationMenuList className="flex flex-col">
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
@@ -37,7 +37,7 @@ const LayoutComponent = ({children}: LayoutProps) => {
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
-      </NavigationMenu>
+      </NavigationMenu> */}
       {children}
     </div>
   )

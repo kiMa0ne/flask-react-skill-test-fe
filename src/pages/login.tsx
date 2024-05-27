@@ -9,20 +9,15 @@ const Login = () => {
 
   const { data: session } = useSession()
 
-  // useEffect(() => {
-  //   axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/auth/login`, {username: "admin", password: "1234"}).then(response => {
-  //     console.log(response)
-  //   })
-  // }, [])
-
   const form = useForm()
+
   const onSubmit = async (data: any) => {
     console.log(data)
     await signIn('credentials', {
       username: data.username,
       password: data.password,
-      // redirect: true,
-      // callbackUrl: "/"
+      redirect: true,
+      callbackUrl: "/"
     })
   }
 
@@ -53,7 +48,7 @@ const Login = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Password" {...field} />
+                  <Input placeholder="Password" type="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
