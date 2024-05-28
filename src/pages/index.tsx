@@ -22,7 +22,7 @@ export default function Home() {
   useEffect(() => {
     // GET CUSTOMERS
     console.log({session})
-    axios.get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/get-customers`, { headers: {"Authorization" : `Bearer ${session?.user.token}`} }).then((response) => {
+    axios.get(`/api/customers/get-customers`, { headers: {"Authorization" : `Bearer ${session?.user.token}`} }).then((response) => {
       console.log(response)
       setCustomersData(response.data)
     }).catch(error => console.error(error))
@@ -43,7 +43,7 @@ export default function Home() {
 
     // UPDATE CUSTOMER
 
-  }, [session?.user.token])
+  }, [])
 
   return (
     <div>

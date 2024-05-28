@@ -46,7 +46,7 @@ export const columns: ColumnDef<Customer>[] = [
           <Button size="icon" onClick={() => console.log(customerItem)} className="bg-green-800">
             <Pencil size={16} />
           </Button>
-          <Button size="icon" onClick={() => deleteCustomer(customerItem.id)} className="bg-red-600">
+          <Button size="icon" onClick={() => console.log(customerItem)} className="bg-red-600">
             <Trash2  size={16}/>
           </Button>
         </div>
