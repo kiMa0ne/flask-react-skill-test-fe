@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/navigation-menu"
 import Link from "next/link"
 import { ReactNode } from "react"
+import { Button } from "./ui/button"
+import { signOut, useSession } from "next-auth/react"
 
 
 interface LayoutProps {
@@ -18,17 +20,22 @@ interface LayoutProps {
 }
 
 const LayoutComponent = ({children}: LayoutProps) => {
+  const handleSignOut = () => {
+    signOut({ callbackUrl: "/login", redirect: true})
+  }
+  const { data: session } = useSession()
+
   return (
     <div>
-      {/* <NavigationMenu>
+      <NavigationMenu>
         <NavigationMenuList className="flex flex-col">
-          <NavigationMenuItem>
+          {session && <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Item1
+                <Button onClick={() => handleSignOut()}>LOGOUT</Button>
               </NavigationMenuLink>
             </Link>
-          </NavigationMenuItem>
+          </NavigationMenuItem>}
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -37,7 +44,7 @@ const LayoutComponent = ({children}: LayoutProps) => {
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
-      </NavigationMenu> */}
+      </NavigationMenu>
       {children}
     </div>
   )

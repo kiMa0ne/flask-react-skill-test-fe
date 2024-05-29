@@ -16,15 +16,17 @@ import {
 import { Button } from "../ui/button"
 import { Pencil, Trash2 } from "lucide-react"
 import axios from "axios"
-import { useSession } from "next-auth/react"
+import { useForm } from "react-hook-form"
+import { Dispatch, SetStateAction, useState } from "react"
 
 interface DataTableProps<TData> {
   data: TData[]
   deleteCustomer: (customerId: number) => void
+  setIsEditingCustomer: Dispatch<SetStateAction<boolean>>
+  setCurrentCustomer: Dispatch<SetStateAction<number | null>>
 }
 
-export function DataTable<TData extends { id: number }>({ data, deleteCustomer }: DataTableProps<TData>) {
-
+export function DataTable<TData extends { id: number }>({ data, deleteCustomer, setIsEditingCustomer, setCurrentCustomer }: DataTableProps<TData>) {
   const columns: ColumnDef<TData>[] = [
     {
       accessorKey: "id",
@@ -56,8 +58,9 @@ export function DataTable<TData extends { id: number }>({ data, deleteCustomer }
         const customerItem = row.original
         return (
           <div className="flex gap-2">
-            <Button size="icon" onClick={() => console.log(customerItem)} className="bg-green-800">
-              <Pencil size={16} />
+
+            <Button size="icon" onClick={() => {setIsEditingCustomer(true); setCurrentCustomer(customerItem.id)}} className="bg-green-600">
+              <Pencil  size={16}/>
             </Button>
             <Button size="icon" onClick={() => deleteCustomer(customerItem.id)} className="bg-red-600">
               <Trash2  size={16}/>

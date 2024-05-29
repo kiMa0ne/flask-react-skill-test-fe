@@ -1,18 +1,17 @@
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { signIn, signOut, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
 
 const Login = () => {
-
-  const { data: session } = useSession()
+  const router = useRouter()
+  const { error } = router.query
 
   const form = useForm()
 
   const onSubmit = async (data: any) => {
-    console.log(data)
     await signIn('credentials', {
       username: data.username,
       password: data.password,
@@ -23,13 +22,12 @@ const Login = () => {
 
   return (
     <div className="login-form-container px-5 w-1/3">
-
-      <Button onClick={() => console.log(session)}>TEST</Button>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
             name="username"
+            defaultValue=""
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Username</FormLabel>
@@ -44,6 +42,7 @@ const Login = () => {
           <FormField
             control={form.control}
             name="password"
+            defaultValue=""
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
@@ -54,10 +53,12 @@ const Login = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <div className="flex justify-between">
+            <Button type="submit">Submit</Button>
+            {typeof error === 'string' && decodeURIComponent(error).includes("401") && <p className="text-red-600">Wrong credentials</p>}
+          </div>
         </form>
       </Form>
-      <Button onClick={() => signOut()}>LOGOUT</Button>
     </div>
   )
 

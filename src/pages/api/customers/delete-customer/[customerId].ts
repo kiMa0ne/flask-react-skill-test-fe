@@ -6,7 +6,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const token = await getToken({ req })
   const user = (token as { user: TokenUser }).user
   const accessToken = user.token
-  const { pid: customerId } = req.query
+  const { customerId } = req.query
 
   try {
     const response = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_API_URL}/delete-customer/${customerId}`, {
