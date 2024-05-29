@@ -89,7 +89,7 @@ export default function Home() {
 
   return (
     <div>
-      <Link href={"/login"}>LOGIN</Link>
+      {/* <Link href={"/login"}>LOGIN</Link> */}
       <DataTable
         data={customersData}
         deleteCustomer={deleteCustomer}
@@ -208,6 +208,7 @@ export default function Home() {
           </DialogHeader>
           <div className="flex items-center space-x-2">
 
+            {/* TODO: Componentize the form */}
             <Form {...customerForm}>
               <form onSubmit={customerForm.handleSubmit(onEditCustomerSubmit)} className="space-y-4 w-full">
                 <FormField

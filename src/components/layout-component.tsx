@@ -36,13 +36,6 @@ const LayoutComponent = ({children}: LayoutProps) => {
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>}
-          <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Item2
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
       {children}
